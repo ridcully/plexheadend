@@ -51,8 +51,8 @@ func (p *plexHeadend) listen() {
 
 func init() {
 	pflag.CommandLine.BoolP("version", "", false, "Display version and exit")
-	pflag.CommandLine.StringP("tvh-user", "u", "plex", "TVHeadend Username")
-	pflag.CommandLine.StringP("tvh-pass", "P", "plex", "TVHeadend Password")
+	pflag.CommandLine.StringP("tvh-user", "u", "", "TVHeadend Username")
+	pflag.CommandLine.StringP("tvh-pass", "P", "", "TVHeadend Password")
 	pflag.CommandLine.StringP("tvh-host", "h", "localhost", "TVHeadend Host")
 	pflag.CommandLine.StringP("tvh-port", "p", "9981", "TVHeadend Port")
 	pflag.CommandLine.StringP("proxy-bind", "b", "", "Bind address (default all)")
@@ -86,10 +86,14 @@ func main() {
 		return
 	}
 
+	tvhBase := "http://"
+	if viper.GetString("tvh-user") != "" {
+		tvhBase += viper.GetString("tvh-user") + ":" + viper.GetString("tvh-pass") + "@"
+	}
+	tvhBase += viper.GetString("tvh-host") + ":" + viper.GetString("tvh-port")
+
 	p := plexHeadend{
-		fmt.Sprintf("http://%s:%s@%s:%s",
-			viper.GetString("tvh-user"), viper.GetString("tvh-pass"),
-			viper.GetString("tvh-host"), viper.GetString("tvh-port")),
+		tvhBase,
 		fmt.Sprintf("http://%s:%s",
 			viper.GetString("proxy-bind"), viper.GetString("proxy-listen")),
 		fmt.Sprintf("%s:%s",
