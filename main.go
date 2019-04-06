@@ -57,7 +57,7 @@ func init() {
 	pflag.CommandLine.StringP("tvh-host", "h", "localhost", "TVHeadend Host")
 	pflag.CommandLine.StringP("tvh-port", "p", "9981", "TVHeadend Port")
 	pflag.CommandLine.StringP("proxy-bind", "b", "", "Bind address (default all)")
-	pflag.CommandLine.StringP("proxy-listen", "l", "80", "Listen port")
+	pflag.CommandLine.StringP("proxy-listen", "l", "8001", "Listen port")
 	pflag.CommandLine.StringP("proxy-hostname", "H", "localhost", "Hostname reported to Plex")
 	pflag.CommandLine.StringP("name", "n", "plexHeadend", "Friendly name reported to Plex")
 	pflag.CommandLine.StringP("device-id", "i", "1", "Device ID reported to Plex")
