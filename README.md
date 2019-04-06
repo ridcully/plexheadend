@@ -1,24 +1,16 @@
 # plexheadend
 
-[![GoDoc](https://godoc.org/github.com/wrboyce/plexheadend?status.svg)](https://godoc.org/github.com/wrboyce/plexheadend)
-[![Go Report Card](https://goreportcard.com/badge/github.com/wrboyce/plexheadend)](https://goreportcard.com/report/github.com/wrboyce/plexheadend)
-[![CircleCI](https://circleci.com/gh/wrboyce/plexheadend.png?style=shield)](https://circleci.com/gh/wrboyce/plexheadend)
-
-Proxy requests between PlexDVR and TVHeadend
+Proxy requests between PlexDVR and TVHeadend. This is a fork of github.com/wrboyce/plexheadend . All credits go to Will Boyce.
 
 ## Installation
 
-### Binary Release
-
-Download the latest release from the [downloads page](https://github.com/wrboyce/plexheadend/releases).
-
 ### Build from Source
 
-Download and build the project and its dependencies with the standard Go tooling, `go get github.com/wrboyce/plexheadend`.
+Download and build the project and its dependencies with the standard Go tooling, `go get github.com/ridcully/plexheadend`.
 
-### Docker Container
+To cross compile for your target machine:
 
-There is also a Docker container made available for use at `wrboyce/plexheadend`.
+```GOOS="linux" GOARCH="arm64" go build```
 
 ## Usage
 
@@ -48,10 +40,12 @@ Usage of plexheadend:
   -f, --tag string              TVHeadend tag to filter reported channels (default none)
   -t, --tuners int              Number of Tuners reported to Plex (default 1)
   -h, --tvh-host string         TVHeadend Host (default "localhost")
-  -P, --tvh-pass string         TVHeadend Password (default "plex")
+  -P, --tvh-pass string         TVHeadend Password
   -p, --tvh-port string         TVHeadend Port (default "9981")
-  -u, --tvh-user string         TVHeadend Username (default "plex")
+  -u, --tvh-user string         TVHeadend Username
 ```
+
+Please note, if your Plex Media Server ist not on the same host, as tvHeadend and plexhead, than you need to set the --proxy-hostname and -tvh-host parameter to IPs reachable by the Plex Media Server.
 
 ### Example `docker-compose` Usage
 
