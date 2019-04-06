@@ -42,6 +42,7 @@ func (p *plexHeadend) listen() {
 	http.HandleFunc("/lineup.json", p.lineupHandler)
 	http.HandleFunc("/lineup_status.json", p.lineupStatusHandler)
 	http.HandleFunc("/lineup.post", p.lineupPostHandler)
+	http.HandleFunc("/xmltv", p.xmltvGetHandler)
 
 	http.ListenAndServe(p.listenAddr, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%s %s %s", r.RemoteAddr, r.Method, r.URL)

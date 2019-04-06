@@ -88,3 +88,7 @@ func (p *plexHeadend) lineupStatusHandler(w http.ResponseWriter, r *http.Request
 }
 
 func (p *plexHeadend) lineupPostHandler(w http.ResponseWriter, r *http.Request) {}
+
+func (p *plexHeadend) xmltvGetHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write(p.tvhGetXmltv())
+}

@@ -19,6 +19,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -42,6 +43,21 @@ type apiChannel struct {
 	Number int      `json:"number"`
 	Tags   []string `json:"tags"`
 	URL    string   `json:"url"`
+}
+
+func (p *plexHeadend) tvhGetXmltv() []byte {
+	resp, err := http.Get(fmt.Sprintf("%s/xmltv", p.tvhBaseURL))
+	if err != nil {
+		return nil
+	}
+
+	if resp.StatusCode == http.StatusOK {
+		bodyBytes, _ := ioutil.ReadAll(resp.Body)
+		resp.Body.Close()
+		return bodyBytes
+	}
+
+	return nil
 }
 
 func (p *plexHeadend) tvhGetTags() map[string]string {
